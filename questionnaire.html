@@ -14,21 +14,17 @@
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6">
 		<div class="container mt-3">
-		  <h2>Chatbot Questionnaire Page</h2>
-		  <form action="/questionnaire.html">
-			<div class="mb-3 mt-3">
-			  <label for="email">Email:</label>
-			  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-			</div>
-			<div class="mb-3">
-			  <label for="pwd">Password:</label>
-			  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-			</div>
-			<div class="form-check mb-3">
-			  <label class="form-check-label">
-				<input class="form-check-input" type="checkbox" name="remember"> Remember me
-			  </label>
-			</div>
+		  <h2>Create Questionnaire</h2><br><br>
+		  <form action="./questionnaire.html">
+			<input type="text" class="form-control" placeholder="Disease condition"></input> <br>
+			<textarea class="form-control" rows="2" id="diseaseDesc" name="diseaseDesc" placeholder="Disease description"></textarea><br><br>
+			
+			<input id="question1" type="text" class="form-control" placeholder="Question-1"></input><br>
+			<input id="question2"type="text" class="form-control" placeholder="Question-2"></input><br>
+			<input id="question3"type="text" class="form-control" placeholder="Question-3"></input><br>
+			<input id="question4"type="text" class="form-control" placeholder="Question-4"></input><br>
+			<input id="question5"type="text" class="form-control" placeholder="Question-5"></input><br>
+			
 			<button type="submit" class="btn btn-primary">Submit</button>
 		  </form>
 		</div>
