@@ -1,0 +1,43 @@
+<%- include('header.ejs') %>
+<div class="row">
+	<div class="col-sm-6">
+		<form action="/update" method="POST">
+			<div class="container">
+				<h3>Questionnaire List</h3><br>
+				<ul>
+				  <% qlist.forEach(function(qtemplate) { %>
+				  <li>
+					<h4><%=qtemplate.disease%></h4>
+					<p><%=qtemplate.description%></p>
+					<textarea class="form-control" rows="3" id="questions" name="questions"><%=qtemplate.questions%></textarea>
+					<br>
+				  </li>
+				  <% })%>
+				</ul>
+				<br>
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Update Questionnaire</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-sm-6">
+		<form action="/add" method="POST">
+			<div class="container mt-3">
+			  <h4>Add New Questionnaire</h4><br>
+				<input id="disease" name="disease" type="text" class="form-control" placeholder="Disease condition"></input> <br>
+				<input id="description" name="description" type="text" class="form-control" placeholder="Description"></input> <br>
+				
+				<input id="question1" name="question1" type="text" class="form-control" placeholder="Question-1"></input><br>
+				<input id="question2" name="question2" type="text" class="form-control" placeholder="Question-2"></input><br>
+				<input id="question3" name="question3" type="text" class="form-control" placeholder="Question-3"></input><br>
+				
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Add Questionnaire</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include('footer.ejs') %>
