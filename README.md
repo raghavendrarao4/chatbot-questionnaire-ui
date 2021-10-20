@@ -11,7 +11,7 @@ This application consumes REST API exposed by 'chatbot-backend' app [https://git
 4. Run 'node index.js' from command prompt
 5. View application endpoint at localhost:3000
 
-App is hosted, verified locally, to be tested on cloud environment
+App is verified locally, yet to be deployed & tested on cloud environment
 
 # Tech stack
 Express, Mongo DB, EJS, Axios
