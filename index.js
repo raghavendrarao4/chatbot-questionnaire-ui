@@ -14,14 +14,15 @@ app.get("/", (req, res) => {
   res.render("index"); // index refers to index.ejs
 });
 
-//post to login
-app.post("/login", (req, res) => {
+//Post to login
+app.post("/login", async (req, res) => {
 	
 	var email = req.body.email;
 	var credentials = req.body.pwd;
 	
-	//axios.get('http://localhost:8080/api/userprofile?email=' + email);
-	if(credentials == "doctor") {
+	let result = await axios.get('http://localhost:8080/api/userprofile?email=' + email);
+	
+	if(credentials == "doctor" && result.data != "") {
 		res.redirect("/view");
 	} else {
 		res.render("failure");
@@ -29,10 +30,28 @@ app.post("/login", (req, res) => {
 });
 
 //Update questionnaire template
-app.post("/update", (req, res) => {
+app.post("/updateTemplate", (req, res) => {
+
+	let updateClick = req.body.update;
+	let deleteClick = req.body.delete;
+	let questions = req.body.questions;
+	let payload = { questions: questions};
+	let id = req.body.questionnaireId;
 	
-	res.send("Update called");
-	
+	try {
+		if(updateClick) {
+			let response = axios.put(`http://localhost:8080/api/template/${id}`, payload);
+		}
+		
+		if(deleteClick) {
+			let response = axios.delete(`http://localhost:8080/api/template/${id}`);
+		}
+		
+		res.redirect("/view");
+	} catch (error) {
+		console.log(error);
+		res.status(400).send("Error during questionnaire update");
+	}
 });
 
 //Add Questionnaire
@@ -48,19 +67,19 @@ app.post("/add", (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(400).send("Error while getting list of questionnaire");
-	}	
+	}
 	
 });
 
 
-//view all questionnaire templates
+//View all questionnaire templates
 app.get("/view", async (req, res) => {
 	
 	try {
 		const questionnaire = await axios.get(`http://localhost:8080/api/template`);
 		
-		
 		const qlist = questionnaire.data.map((questionnaire) => ({
+			id: questionnaire.id,
 			disease: questionnaire.disease,
 			description: questionnaire.description,
 			questions: questionnaire.questions,
@@ -71,24 +90,6 @@ app.get("/view", async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(400).send("Error while getting list of questionnaire");
-	}
-});
-
-app.get("/repos", async (req, res) => {
-	const username = req.query.username || "raghavendrarao4";
-	
-	try {
-		const result = await axios.get(`https://api.github.com/users/${username}/repos`);
-		const repos = result.data.map((repo) => ({
-			name: repo.name,
-			url: repo.html_url,
-			description: repo.description,
-		}));
-
-		res.render("repos", {repos});
-	} catch (error) {
-		console.log(error);
-		res.status(400).send("Error while getting list of repositories");
 	}
 });
 
