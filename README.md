@@ -13,5 +13,9 @@ This application consumes REST API exposed by 'chatbot-backend' app [https://git
 
 App is verified locally, yet to be deployed & tested on cloud environment
 
+Note: 
+ a. Current version of the UI needs user profile to be created on the backend (use 'user profile' API exposed from the backend.
+ b. Default password is set to 'doctor'. Login verification is in-progress, will be integrated shortly.
+
 # Tech stack
 Express, Mongo DB, EJS, Axios
